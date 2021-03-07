@@ -1,0 +1,20 @@
+---------------------------------------------------------------------------------------------------------------------
+Challenge 1 (easy)
+
+Find the key K and decrypt the following ciphertext which is encrypted by shift cipher with K
+
+Encryption scheme: shift cipher
+
+Ciphertext: WTAADLDGASXCUDGBPIXDCHTRJGXIN
+
+---------------------------------------------------------------------------------------------------------------------
+Challenge 2 (hard)
+
+Find the key K with a length of 3 and decrpyt the following ciphertext which is encrypted the Vigenere cipher with K
+
+Encryption scheme: Vigenere cipher
+
+Ciphertext: EGPKQQMVSQPJWTQIVMWPWMEYZKXG
+
+(Hint: the plaintext starts with 'w')
+---------------------------------------------------------------------------------------------------------------------

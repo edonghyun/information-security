@@ -1,0 +1,16 @@
+Problem1. 
+233 -> 2^29 = 1 mod 233 (inconclusive) 
+235 -> q = 117  (117*2=234-1) -> k=1이기 때문에 k=0만 확인.->composit 
+237 -> q = 59 (59*4=237-1) -> k=2 이기 때문에 k=0, k=1 확인. > 239-> 2^119 = 1 mod 239(inconclusive) 
+241->15^15 = 1 mod 241(inconclusive)
+
+Problem.2 
+M^e mod n = (2^23) mod 56153 = 21811 
+
+Problem.3 p=233,q=241 ( p*q=56153), d = 19367 (given e is 23) 
+
+Problem.4 
+a1 = (21811^19367) mod 233 = 2 
+a2 = (21811^19367) mod 241 = 2 
+c1 = 241 * 204 
+c2 = 233 * 30 (c1*a1+c2*a2) mod 56153  = 2
