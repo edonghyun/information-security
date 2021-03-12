@@ -2,29 +2,29 @@
 #include <stdlib.h>
 #include <string.h>
 
-void* HexaToBinary(char* input,char*target, int b);
-char* BinaryToHexa(char* input,char*target, int b);
+void *convertHexaToBinary(char *input, char *target, int b);
+char *convertBinaryToHexa(char *input, char *target, int b);
 
-void* F_function(char* target, char* key, char* plaintext);
+void *F_function(char *target, char *key, char *plaintext);
 
-void* LeftText(char* plaintext, char* target, int type);
-void* RightText(char* plaintext, char* target, int type);
-void* LeftShift(char text[]);
+void *rotateTextLeft(char *plaintext, char *target, int type);
+void *rotateTextRight(char *plaintext, char *target, int type);
+void *shiftTextLeft(char text[]);
 
-void* Sboxes(char* target, char* text);
-void* XORoperation(char* target, char* a, char*b);
+void *Sboxes(char *target, char *text);
+void *operateXOR(char *target, char *a, char *b);
 
-void* Permutation(char* item,char* target);
+void *permutate(char *item, char *target);
 
-void* FeistelCipher(char* key, char* plaintext, char* result);
-void* Merge(char* a, char*b, char* target, int c);
+void *getFeistelCipherdText(char *key, char *plaintext, char *result);
+void *mergeTexts(char *a, char *b, char *target, int c);
 
-void* printBinary(char* name, char* text, int type);
-void* BinaryCode(int a, int* array);
+void *printBinaryText(char *name, char *text, int type);
+void *getBinaryText(int a, int *array);
 
 int main(void)
 {
-	
+
 	//////////////////////////////////////////////////
 	/*
 	char name[] = "E4E8EF2E";
@@ -34,18 +34,18 @@ int main(void)
 	int store[4];
 
 	int a = 2;
-	int* BTest = BinaryCode(a,store);
+	int* BTest = getBinaryText(a,store);
 	for (a = 0; a < 4; a++)
 	{
 		printf("%d", BTest[a]);
 	}
 	printf("\n");
 
-	test = HexaToBinary(test, 8);
+	test = convertHexaToBinary(test, 8);
 	
 	
 	printf("%s\n", test);
-	printf("%s\n", Permutation(test));
+	printf("%s\n", permutate(test));
 
 	///////////////////////////////////////////////////
 
@@ -54,24 +54,24 @@ int main(void)
 	char cipher[] = "4FC83760C78F6EF0";
 
 	*/
-	//1AC00000	
+	//1AC00000
 	char key2[] = "00000000";
 	char plaintext[] = "40FF24330947F610";
 	char cipher[] = "EC2DE1305B5F5B02";
 	//EC2DE1305B5F5B02
 
-	char* FK = (char*)malloc(sizeof(char) * 9);
-	
-	char* FP = (char*)malloc(sizeof(char) * 17);
+	char *FK = (char *)malloc(sizeof(char) * 9);
 
-	char* PlainT = (char*)malloc(sizeof(char) * 65);
-	char* KeyT = (char*)malloc(sizeof(char) * 33);
-	
-	char* result = (char*)malloc(sizeof(char) * 65);
+	char *FP = (char *)malloc(sizeof(char) * 17);
 
-	char* answer = cipher;
-	char* Test = (char*)malloc(sizeof(char) * 9);
-	
+	char *PlainT = (char *)malloc(sizeof(char) * 65);
+	char *KeyT = (char *)malloc(sizeof(char) * 33);
+
+	char *result = (char *)malloc(sizeof(char) * 65);
+
+	char *answer = cipher;
+	char *Test = (char *)malloc(sizeof(char) * 9);
+
 	memset(FK, 0, sizeof(char) * 9);
 	memset(FP, 0, sizeof(char) * 17);
 	memset(PlainT, 0, sizeof(char) * 65);
@@ -81,36 +81,35 @@ int main(void)
 
 	long long a = 0;
 	long long startpoint = 0;
-	
 
 	char key3[] = "0434EF71";
 	char plaintext2[] = "1024AA9F473C58C1";
-	
+
 	printf("TEST: 1 NO: 0\n");
 	scanf("%lld", &startpoint);
 
 	if (startpoint == 1)
 	{
-		HexaToBinary(key3, KeyT, 8);
-		HexaToBinary(plaintext2, PlainT, 16);
-		FeistelCipher(KeyT, PlainT, result);
-		BinaryToHexa(result, FP, 64);
+		convertHexaToBinary(key3, KeyT, 8);
+		convertHexaToBinary(plaintext2, PlainT, 16);
+		getFeistelCipherdText(KeyT, PlainT, result);
+		convertBinaryToHexa(result, FP, 64);
 		printf("Plaintext : %s\n", plaintext2);
 		printf("Key : %s\n", key3);
 		printf("Ciphertext: %s\n", FP);
 	}
-	
+
 	printf("What number do you want to start from?\n");
 	scanf("%s", key2);
 	printf("\nBrute Force Start From : %s", key2);
 
 	strcpy_s(Test, sizeof(char) * 9, key2);
 	strcpy_s(FK, sizeof(char) * 9, key2);
-	
+
 	while (1)
 	{
 		a++;
-		
+
 		/*
 		printf("\n%s\n", KeyT);
 		printf("\n%s\n", PlainT);
@@ -118,91 +117,92 @@ int main(void)
 		printf("\n%s\n", result);
 		printf("\n%s\n", answer);
 		*/
-		
-		HexaToBinary(Test, KeyT, 8); // Key T : 32ºñÆ® Å°
-		HexaToBinary(plaintext, PlainT, 16); // PlainT  64ºñÆ® ÅØ½ºÆ®
 
-		FeistelCipher(KeyT, PlainT, result); // result : 64ºñÆ® ¾ÏÈ£¹® 
-		BinaryToHexa(result, FP, 64); // FP : 16ºñÆ® ¾ÏÈ£¹®
+		convertHexaToBinary(Test, KeyT, 8);			// Key T : 32ï¿½ï¿½Æ® Å°
+		convertHexaToBinary(plaintext, PlainT, 16); // PlainT  64ï¿½ï¿½Æ® ï¿½Ø½ï¿½Æ®
 
-		if (strcmp(FP, answer) == 0) {  // FP ¿Í ÁÖ¾îÁø ¾ÏÈ£¹® ºñ±³
-		printf("Key is .. : %s\n", KeyT);
-		BinaryToHexa(KeyT, FK, 32);
-		printf("Key is .. : %s\n", FK);
-		break;
+		getFeistelCipherdText(KeyT, PlainT, result); // result : 64ï¿½ï¿½Æ® ï¿½ï¿½È£ï¿½ï¿½
+		convertBinaryToHexa(result, FP, 64);		 // FP : 16ï¿½ï¿½Æ® ï¿½ï¿½È£ï¿½ï¿½
+
+		if (strcmp(FP, answer) == 0)
+		{ // FP ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½
+			printf("Key is .. : %s\n", KeyT);
+			convertBinaryToHexa(KeyT, FK, 32);
+			printf("Key is .. : %s\n", FK);
+			break;
 		}
-			BinaryToHexa(KeyT, FK, 32);
-			if (a % 100000 == 0)
-			{
-				printf("Try Key : %s\n", FK);
-				printf("Plain  :  %s\n", plaintext);
-				printf("Correct : %s\n", answer);
-				printf("Cipher :  %s\n\n", FP);
-			}
-
-			FK[7]++;
-
-			if (FK[7] == 'G')
-			{
-				FK[7] = '0';
-				FK[6] ++;
-			}
-			if (FK[6] == 'G')
-			{
-				FK[6] = '0';
-				FK[5] ++;
-			}
-			if (FK[5] == 'G')
-			{
-				FK[5] = '0';
-				FK[4] ++;
-			}
-			if (FK[4] == 'G')
-			{
-				FK[4] = '0';
-				FK[3] ++;
-			}
-			if (FK[3] == 'G')
-			{
-				FK[3] = '0';
-				FK[2] ++;
-			}
-			if (FK[2] == 'G')
-			{
-				FK[2] = '0';
-				FK[1] ++;
-			}
-			if (FK[1] == 'G')
-			{
-				FK[1] = '0';
-				FK[0] ++;
-			}
-			if (FK[0] == 'G')
-			{
-				printf("Error, reach to the last number %s\n", FK);
-				break;
-			}
-		
-			strcpy_s(Test, sizeof(char) * 9, FK);
+		convertBinaryToHexa(KeyT, FK, 32);
+		if (a % 100000 == 0)
+		{
+			printf("Try Key : %s\n", FK);
+			printf("Plain  :  %s\n", plaintext);
+			printf("Correct : %s\n", answer);
+			printf("Cipher :  %s\n\n", FP);
 		}
-		printf("terminate\n");
-		scanf("%d", &startpoint);
+
+		FK[7]++;
+
+		if (FK[7] == 'G')
+		{
+			FK[7] = '0';
+			FK[6]++;
+		}
+		if (FK[6] == 'G')
+		{
+			FK[6] = '0';
+			FK[5]++;
+		}
+		if (FK[5] == 'G')
+		{
+			FK[5] = '0';
+			FK[4]++;
+		}
+		if (FK[4] == 'G')
+		{
+			FK[4] = '0';
+			FK[3]++;
+		}
+		if (FK[3] == 'G')
+		{
+			FK[3] = '0';
+			FK[2]++;
+		}
+		if (FK[2] == 'G')
+		{
+			FK[2] = '0';
+			FK[1]++;
+		}
+		if (FK[1] == 'G')
+		{
+			FK[1] = '0';
+			FK[0]++;
+		}
+		if (FK[0] == 'G')
+		{
+			printf("Error, reach to the last number %s\n", FK);
+			break;
+		}
+
+		strcpy_s(Test, sizeof(char) * 9, FK);
+	}
+	printf("terminate\n");
+	scanf("%d", &startpoint);
 	free(PlainT);
 	free(KeyT);
 	free(FK);
 	free(FP);
-	free(result);		
+	free(result);
 	return 0;
 }
 
-void* printBinary(char* name, char* text, int type)
+void *printBinaryText(char *name, char *text, int type)
 {
 	printf("%s ++ ", name);
-	for (int a = 0; a < type+1; a++)
+	for (int a = 0; a < type + 1; a++)
 	{
 		printf("%c", text[a]);
-		
-		if ((a+1) % 4 == 0 && a>0)
+
+		if ((a + 1) % 4 == 0 && a > 0)
 		{
 			printf(" ");
 		}
@@ -210,12 +210,12 @@ void* printBinary(char* name, char* text, int type)
 	printf("++ ");
 	return 0;
 }
-void* XORoperation(char* target, char* a, char*b)
+void *operateXOR(char *target, char *a, char *b)
 {
-	char result[33] = { 0 };
+	char result[33] = {0};
 
-	char buffa[1] = { 0 };
-	char buffb[1] = { 0 };
+	char buffa[1] = {0};
+	char buffb[1] = {0};
 	int cnt = 0;
 	int length = strlen(a);
 	for (cnt = 0; cnt < length; cnt++)
@@ -226,32 +226,33 @@ void* XORoperation(char* target, char* a, char*b)
 		{
 			result[cnt] = '0';
 		}
-		else {
+		else
+		{
 			result[cnt] = '1';
 		}
 	}
 	result[cnt] = '\0';
-	
+
 	strcpy_s(target, sizeof(char) * 33, result);
-	
+
 	return;
 }
-void* Merge(char* a, char*b, char* target, int c)
+void *mergeTexts(char *a, char *b, char *target, int c)
 {
-	char result1[65] = { 0 };
-	char result2[33] = { 0 };
+	char result1[65] = {0};
+	char result2[33] = {0};
 	int cnt = 0;
 
 	if (c == 16)
 	{
 		strcpy_s(result2, sizeof(char) * 17, a);
-		
+
 		for (cnt = 0; cnt < 16; cnt++)
 		{
 			result2[cnt + 16] = b[cnt];
 		}
 		result2[32] = '\0';
-		
+
 		strcpy_s(target, sizeof(char) * 33, result2);
 		return;
 	}
@@ -262,60 +263,59 @@ void* Merge(char* a, char*b, char* target, int c)
 		{
 			result1[cnt + 32] = b[cnt];
 		}
-		result1[64] = '\0';	
-		
+		result1[64] = '\0';
+
 		strcpy_s(target, sizeof(char) * 65, result1);
 		return;
 	}
 }
-void* FeistelCipher(char* key, char* plaintext, char* result)
-{/*
+void *getFeistelCipherdText(char *key, char *plaintext, char *result)
+{ /*
 	char * LText = (char*)malloc(sizeof(char) * 33);
 	char * RText = (char*)malloc(sizeof(char) * 33);
 	char* LKey = (char*)malloc(sizeof(char) * 17);
 	char* RKey = (char*)malloc(sizeof(char) * 17);
-	char* MergeK = (char*)malloc(sizeof(char) * 33);
-	char* MergeT = (char*)malloc(sizeof(char) * 65);
+	char* mergeTextsK = (char*)malloc(sizeof(char) * 33);
+	char* mergeTextsT = (char*)malloc(sizeof(char) * 65);
 	char* temp = (char*)malloc(sizeof(char)* 33);
 	char* A_RText = (char*)malloc(sizeof(char)*33);
 	*/
 	char LText2[33] = {0};
-	char RText2[33] = { 0 };
-	char LKey2[17] = { 0 };
-	char RKey2[17] = { 0 };
-	char MergeT2[65] = { 0 };
-	char temp3[33] = { 0 };
-	char A_RText2[33] = { 0 };
-	char TempKey[33] = { 0 };
+	char RText2[33] = {0};
+	char LKey2[17] = {0};
+	char RKey2[17] = {0};
+	char mergeTextsT2[65] = {0};
+	char temp3[33] = {0};
+	char A_RText2[33] = {0};
+	char TempKey[33] = {0};
 
-	char* LText = LText2;
-	char* RText = RText2;
-	char* LKey = LKey2;
-	char* RKey = RKey2;
-	char* MergeT = MergeT2;
-	char* temp4 = temp3;
-	char* A_RText = A_RText2;
-	
-	char* key2 = TempKey;
+	char *LText = LText2;
+	char *RText = RText2;
+	char *LKey = LKey2;
+	char *RKey = RKey2;
+	char *mergeTextsT = mergeTextsT2;
+	char *temp4 = temp3;
+	char *A_RText = A_RText2;
 
+	char *key2 = TempKey;
 
 	strcpy_s(key2, sizeof(char) * 33, key);
 
-	LeftText(plaintext, LText, 64);
-	RightText(plaintext, RText, 64);
-	
+	rotateTextLeft(plaintext, LText, 64);
+	rotateTextRight(plaintext, RText, 64);
+
 	int i = 0;
 	for (i = 1; i < 11; i++)
 	{
 		//printf("\n*--------------------------------------------------------Round %d--------------------------------------------------*\n", i);
 
 		//printf("L%d Text :", i - 1, LText);
-		//printBinary("", LText, 32);
+		//printBinaryText("", LText, 32);
 		//printf("R%d Text :", i - 1, RText);
-		//printBinary("", RText, 32);
+		//printBinaryText("", RText, 32);
 
-		LeftText(key2, LKey, 32);
-		RightText(key2, RKey, 32);
+		rotateTextLeft(key2, LKey, 32);
+		rotateTextRight(key2, RKey, 32);
 
 		//printf("\n*-----------------------------------------------------------------------------------------------------------------*\n");
 
@@ -325,13 +325,13 @@ void* FeistelCipher(char* key, char* plaintext, char* result)
 		//printf("**%s %d\n", LKey, &LKey);
 		//printf("**%s %d\n", RKey, &RKey);
 
-		LeftShift(LKey);
-		LeftShift(RKey);
+		shiftTextLeft(LKey);
+		shiftTextLeft(RKey);
 
 		//printf("()%s %d\n", LKey,&LKey);
 		//printf("()%s %d\n", RKey,&RKey);
 
-		Merge(LKey, RKey, key2, 16);
+		mergeTexts(LKey, RKey, key2, 16);
 
 		//printf("                             Shifted LKey : %s\n", LKey);
 		//printf("                             Shifted RKey : %s\n", RKey);
@@ -339,32 +339,26 @@ void* FeistelCipher(char* key, char* plaintext, char* result)
 		//printf("                             Key%d :%s",i,key2 );
 		//printf("\n*                         ---------------------------------------------------------------                         *\n");
 
-
-		
-
 		strcpy_s(temp4, sizeof(char) * 33, RText);
-		
+
 		F_function(A_RText, key2, RText);
 
-		XORoperation(RText, LText, A_RText);
+		operateXOR(RText, LText, A_RText);
 
 		//printf("\n                             R_Text  :");
-		//printBinary("", A_RText, 32);
+		//printBinaryText("", A_RText, 32);
 		//printf("\n                             L%dText  :",i);
-		//printBinary("", LText, 32);
+		//printBinaryText("", LText, 32);
 		//printf("\n*                         ---------------------------------------------------------------                         *\n");
-		
-		
+
 		strcpy_s(LText, sizeof(char) * 33, temp4);
 
 		//printf("\n*-----------------------------------------------------------------------------------------------------------------*\n");
 		//printf("L%d TexT :", i);
-		//printBinary("", LText, 32);
+		//printBinaryText("", LText, 32);
 		//printf("R%d Text :", i);
-		//printBinary("", RText, 32);
+		//printBinaryText("", RText, 32);
 		//printf("\n*-----------------------------------------------------------------------------------------------------------------*\n");
-
-
 	}
 
 	//
@@ -372,18 +366,18 @@ void* FeistelCipher(char* key, char* plaintext, char* result)
 	strcpy_s(RText, sizeof(char) * 33, LText);
 	strcpy_s(LText, sizeof(char) * 33, temp4);
 
-	Merge(LText, RText,MergeT, 32);
-	
-	strcpy_s(result, sizeof(char) * 65, MergeT);
-	
+	mergeTexts(LText, RText, mergeTextsT, 32);
+
+	strcpy_s(result, sizeof(char) * 65, mergeTextsT);
+
 	/*
 	free(A_RText);
 
 	free(temp);
 
-	free(MergeT);
+	free(mergeTextsT);
 
-	free(MergeK);
+	free(mergeTextsK);
 	
 	free(LKey);
 
@@ -391,20 +385,21 @@ void* FeistelCipher(char* key, char* plaintext, char* result)
 
 	free(LText);
 	*/
-	
+
 	return;
 }
-void* Sboxes(char* target, char* text) {
+void *Sboxes(char *target, char *text)
+{
 
-	char temp1[9] = { 0 };
-	char temp2[33] = { 0 };
-	char temp3[9] = { 0 };
+	char temp1[9] = {0};
+	char temp2[33] = {0};
+	char temp3[9] = {0};
 
-	char* result = temp1;
-	char* output = temp2;
-	char* temp = temp3;
+	char *result = temp1;
+	char *output = temp2;
+	char *temp = temp3;
 
-	BinaryToHexa(text,result, 32); // BinaryCode to Hexa
+	convertBinaryToHexa(text, result, 32); // getBinaryText to Hexa
 
 	int a = 0;
 	char s1[] = "E4D12FB83A6C5907";
@@ -412,38 +407,44 @@ void* Sboxes(char* target, char* text) {
 
 	//printf("%s\n",text);
 	for (a = 0; a < 8; a++)
+	{
+		if ((a + 1) % 2 == 1)
 		{
-		if ((a+1) % 2 == 1) {
-				if ('0' <= result[a] && result[a] <= '9') {
-					temp[a] = s1[result[a] - 48];
-				}
-				else if ('A' <= result[a] && result[a] <= 'F') {
-					temp[a] = s1[result[a] - 55];
-				}
+			if ('0' <= result[a] && result[a] <= '9')
+			{
+				temp[a] = s1[result[a] - 48];
+			}
+			else if ('A' <= result[a] && result[a] <= 'F')
+			{
+				temp[a] = s1[result[a] - 55];
+			}
 		}
-		else {
-			if ('0' <= result[a] && result[a] <= '9') {
+		else
+		{
+			if ('0' <= result[a] && result[a] <= '9')
+			{
 				temp[a] = s2[result[a] - 48];
 			}
-			else if ('A' <= result[a] && result[a] <= 'F') {
+			else if ('A' <= result[a] && result[a] <= 'F')
+			{
 				temp[a] = s2[result[a] - 55];
-				}}	
+			}
 		}
-    temp[a]='\0';
+	}
+	temp[a] = '\0';
 
-	HexaToBinary(temp, output, 8);
-	
+	convertHexaToBinary(temp, output, 8);
+
 	strcpy_s(target, sizeof(char) * 33, output);
-	
+
 	// printf("%s\n",result);
 	return;
 }
 
-void* LeftText(char* plaintext, char* target, int type)
+void *rotateTextLeft(char *plaintext, char *target, int type)
 {
-	char LeftText1[33] = { 0 };
-	char LeftText[17] = { 0 };
-
+	char rotateTextLeft1[33] = {0};
+	char rotateTextLeft[17] = {0};
 
 	int a = 0;
 	if (type == 64)
@@ -451,56 +452,58 @@ void* LeftText(char* plaintext, char* target, int type)
 		for (a = 0; a < 32; a++)
 		{
 
-			LeftText1[a] = plaintext[a];
+			rotateTextLeft1[a] = plaintext[a];
 		}
-		LeftText1[a] = '\0';
+		rotateTextLeft1[a] = '\0';
 
-		strcpy_s(target, sizeof(char) * 33, LeftText1);
+		strcpy_s(target, sizeof(char) * 33, rotateTextLeft1);
 	}
-	else {
+	else
+	{
 		for (a = 0; a < 16; a++)
 		{
-			LeftText[a] = plaintext[a];
+			rotateTextLeft[a] = plaintext[a];
 		}
-		LeftText[a] = '\0';
-		strcpy_s(target, sizeof(char) * 17, LeftText);
+		rotateTextLeft[a] = '\0';
+		strcpy_s(target, sizeof(char) * 17, rotateTextLeft);
 	}
 	return;
 }
-void* RightText(char* plaintext, char* target,int type)
+void *rotateTextRight(char *plaintext, char *target, int type)
 {
-	char RightText[33] = { 0 };
-	char RightText2[17] = { 0 };
+	char rotateTextRight[33] = {0};
+	char rotateTextRight2[17] = {0};
 	int a = 0;
-	
+
 	if (type == 64)
 	{
 		for (a = 0; a < 32; a++)
 		{
-			RightText[a] = plaintext[a+32];
+			rotateTextRight[a] = plaintext[a + 32];
 		}
-		RightText[a] = '\0';
+		rotateTextRight[a] = '\0';
 
-		strcpy_s(target, sizeof(char) * 33, RightText);
+		strcpy_s(target, sizeof(char) * 33, rotateTextRight);
 	}
-	else {
+	else
+	{
 		for (a = 0; a < 16; a++)
 		{
-			RightText2[a] = plaintext[a+16];
+			rotateTextRight2[a] = plaintext[a + 16];
 		}
-		RightText2[a] = '\0';
-		strcpy_s(target, sizeof(char) * 17, RightText2);
+		rotateTextRight2[a] = '\0';
+		strcpy_s(target, sizeof(char) * 17, rotateTextRight2);
 	}
 
 	return;
 }
-void* LeftShift(char text2[])
+void *shiftTextLeft(char text2[])
 {
 	//printf("%s %d\n", text2, &text2);
 	//printf("\n");
 
-	char temp[2] = { 0 };
-	
+	char temp[2] = {0};
+
 	temp[0] = text2[0];
 	temp[1] = '\0';
 	int a = 0;
@@ -512,11 +515,11 @@ void* LeftShift(char text2[])
 	strcat(text2, temp);
 	return;
 }
-void* Permutation(char* item, char* target)
+void *permutate(char *item, char *target)
 {
-	char temp[33] = { 0 };
-	
-	int same[] = { 29,1,17,8,30,22,28,6,18,4,12,19,21,26,2,20,31,10,9,25,13,0,23,15,3,27,5,11,7,14,24,16 };
+	char temp[33] = {0};
+
+	int same[] = {29, 1, 17, 8, 30, 22, 28, 6, 18, 4, 12, 19, 21, 26, 2, 20, 31, 10, 9, 25, 13, 0, 23, 15, 3, 27, 5, 11, 7, 14, 24, 16};
 	int a = 0;
 	for (a = 0; a < 32; a++)
 	{
@@ -524,59 +527,60 @@ void* Permutation(char* item, char* target)
 	}
 
 	temp[a] = '\0';
-	
-	strcpy_s(target, sizeof(char)*33,temp);
-	
+
+	strcpy_s(target, sizeof(char) * 33, temp);
+
 	return;
 }
-void* F_function(char* target, char* key, char* plaintext)
+void *F_function(char *target, char *key, char *plaintext)
 {
-	char temp[33] = { 0 };
-	char Sbox[33] = { 0 };
+	char temp[33] = {0};
+	char Sbox[33] = {0};
 
-	char temp2[9] = { 0 };
+	char temp2[9] = {0};
 
-	char* result2 = temp2;
-	char* result = temp;
-	char* sboxes = Sbox;
+	char *result2 = temp2;
+	char *result = temp;
+	char *sboxes = Sbox;
 
-	XORoperation(result, key, plaintext);
+	operateXOR(result, key, plaintext);
 
-	//printBinary("                             K XOR   :", result, 32);
+	//printBinaryText("                             K XOR   :", result, 32);
 
-	BinaryToHexa(result,result2, 32);
-	
+	convertBinaryToHexa(result, result2, 32);
+
 	//printf("\n                             Hexa    :%s", result2);
 
-	HexaToBinary(result2, result, 8);
+	convertHexaToBinary(result2, result, 8);
 
-	Sboxes(sboxes,result);
+	Sboxes(sboxes, result);
 
-	//printBinary("\n                             SBox    :", sboxes, 32);
+	//printBinaryText("\n                             SBox    :", sboxes, 32);
 
-	Permutation(sboxes,result);
+	permutate(sboxes, result);
 
-	//printBinary("\n                             Permute :", result, 32);
+	//printBinaryText("\n                             Permute :", result, 32);
 
 	strcpy_s(target, sizeof(char) * 33, result);
-	
+
 	return;
 }
-char* BinaryToHexa(char* input, char* target, int b) {
-	
-	char* a = input;
+char *convertBinaryToHexa(char *input, char *target, int b)
+{
+
+	char *a = input;
 	int strleng = strlen(a);
 	int type = 0;
-	
-	int result[16] = { 0 };
-	char result2[17] = { 0 };
 
-	int result3[8] = { 0 };
-	char result4[9] = { 0 };
+	int result[16] = {0};
+	char result2[17] = {0};
 
-	char buff[1] = { 0 };
-	int  buff2[4];
-	int* buff3;
+	int result3[8] = {0};
+	char result4[9] = {0};
+
+	char buff[1] = {0};
+	int buff2[4];
+	int *buff3;
 
 	int cnt = 0;
 	int cnt2 = 0;
@@ -588,7 +592,8 @@ char* BinaryToHexa(char* input, char* target, int b) {
 	{
 		for (cnt = 0; cnt < strleng; cnt++)
 		{
-			if (cnt % 4 == 0) {
+			if (cnt % 4 == 0)
+			{
 				buff2[cnt % 4] = a[cnt] - 48;
 				buff2[(cnt + 1) % 4] = a[cnt + 1] - 48;
 				buff2[(cnt + 2) % 4] = a[cnt + 2] - 48;
@@ -602,24 +607,25 @@ char* BinaryToHexa(char* input, char* target, int b) {
 		}
 		for (cnt = 0; cnt < strlen(a) / 4; cnt++)
 		{
-			if (result[cnt]>9)
+			if (result[cnt] > 9)
 			{
 				result2[cnt] = result[cnt] + 55;
 			}
-			else {
+			else
+			{
 				result2[cnt] = result[cnt] + 48;
 			}
 		}
 		result2[cnt] = '\0';
-		strcpy_s(target,sizeof(char)*17, result2);
+		strcpy_s(target, sizeof(char) * 17, result2);
 		return target;
-
 	}
 	else if (b == 32)
 	{
 		for (cnt = 0; cnt < strleng; cnt++)
 		{
-			if (cnt % 4 == 0) {
+			if (cnt % 4 == 0)
+			{
 				buff2[cnt % 4] = a[cnt] - 48;
 				buff2[(cnt + 1) % 4] = a[cnt + 1] - 48;
 				buff2[(cnt + 2) % 4] = a[cnt + 2] - 48;
@@ -633,40 +639,40 @@ char* BinaryToHexa(char* input, char* target, int b) {
 		}
 		for (cnt = 0; cnt < strlen(a) / 4; cnt++)
 		{
-			if (result3[cnt]>9)
+			if (result3[cnt] > 9)
 			{
 				result4[cnt] = result3[cnt] + 55;
 			}
-			else {
+			else
+			{
 				result4[cnt] = result3[cnt] + 48;
 			}
 		}
 		result4[cnt] = '\0';
-		strcpy_s(target, sizeof(char)*9,result4);
+		strcpy_s(target, sizeof(char) * 9, result4);
 		return target;
 	}
-		
 }
 
-void* HexaToBinary(char* input, char* target, int b)
+void *convertHexaToBinary(char *input, char *target, int b)
 {
 	// if(a==NULL)
 	//    return;
 
-	char* a = input;
+	char *a = input;
 	int strleng = strlen(a);
 	int type = 0;
 
-	int result[32] = { 0 };
-	char result2[33] = { 0 };
+	int result[32] = {0};
+	char result2[33] = {0};
 
-	int result3[65] = { 0 };
-	char result4[65] = { 0 };
+	int result3[65] = {0};
+	char result4[65] = {0};
 
-	char buff[1] = { 0 };
-	
-	int buff4[4] = { 0 };
-	
+	char buff[1] = {0};
+
+	int buff4[4] = {0};
+
 	int cnt = 0;
 	int cnt2 = 0;
 	int renum = 0;
@@ -685,12 +691,13 @@ void* HexaToBinary(char* input, char* target, int b)
 				{
 					cnt2 = buff[0] - 55;
 				}
-				else {
+				else
+				{
 					cnt2 = buff[0] - 48;
 				}
 
-				BinaryCode(cnt2,buff4);
-				
+				getBinaryText(cnt2, buff4);
+
 				for (numa = numb; numa < numb + 4; numa++)
 				{
 					result[numa] = buff4[numa - numb];
@@ -703,8 +710,8 @@ void* HexaToBinary(char* input, char* target, int b)
 			result2[cnt] = result[cnt] + 48;
 		}
 		result2[cnt] = '\0';
-		strcpy_s(target, sizeof(char)*33, result2);
-		
+		strcpy_s(target, sizeof(char) * 33, result2);
+
 		return;
 	}
 	else if (b == 16)
@@ -718,11 +725,12 @@ void* HexaToBinary(char* input, char* target, int b)
 				{
 					cnt2 = buff[0] - 55;
 				}
-				else {
+				else
+				{
 					cnt2 = buff[0] - 48;
 				}
 
-				BinaryCode(cnt2, buff4);
+				getBinaryText(cnt2, buff4);
 
 				for (numa = numb; numa < numb + 4; numa++)
 				{
@@ -737,19 +745,19 @@ void* HexaToBinary(char* input, char* target, int b)
 		}
 		result4[cnt] = '\0';
 
-		strcpy_s(target, sizeof(char)*65, result4);
+		strcpy_s(target, sizeof(char) * 65, result4);
 		return;
 	}
 }
 
-void* BinaryCode(int a, int* array)
+void *getBinaryText(int a, int *array)
 {
 	int cnt = a;
 	int number = 0;
 	int remainder = 0;
 	int temp = 0;
 
-	int* pointer = array;
+	int *pointer = array;
 
 	memset(pointer, 0, 16);
 
@@ -763,7 +771,7 @@ void* BinaryCode(int a, int* array)
 			break;
 	}
 
-	for (cnt = 0; cnt<2; cnt++)
+	for (cnt = 0; cnt < 2; cnt++)
 	{
 		temp = pointer[cnt];
 		pointer[cnt] = pointer[3 - cnt];
@@ -776,6 +784,5 @@ void* BinaryCode(int a, int* array)
 		printf("%d\n", pointer[cnt]);
 	}
 	printf("\n");*/
-	return ;
+	return;
 }
-

@@ -1,18 +1,22 @@
 from fractions import gcd
 
-def powerofNum(a,b):
+def get_num_power(a,b):
     result = 1;
     for number in range(b):
         result=result*a
     return result
-def whetherInt(a):
+
+
+def is_int(a):
     b = int(a)
     b = a-b
     if(b == 0):
         return 1
     else:
         return 0
-def inverseFinding(a,b):
+
+
+def invert_numbers(a,b):
     a1 = 1
     a2 = 0
     a3 = a
@@ -35,7 +39,7 @@ def inverseFinding(a,b):
         if(b3==1):
             return b2
 
-def primeCheck(num):
+def is_prime(num):
     if(num>1):
         for i in range(2,num):
             if(num%i) ==0:
@@ -53,48 +57,46 @@ for a in numlist:
     for number in range(8):
         if(number ==0):
             continue
-        powered_two = powerofNum(2,number);
+        powered_two = get_num_power(2,number);
         b = (a-1)/powered_two
-        if(whetherInt(b)==1):
+        if(is_int(b)==1):
             if(b%2==1):
                 qlist.append(int(b))
 
     print(qlist)
-
     for q in qlist:
         if(q%2==0):
             continue
         for testnum in range(a):
             if(testnum==1):
                 continue
-            c = powerofNum(testnum,q)
+            c = get_num_power(testnum,q)
             b = c%a
             if(b==1):
                 print(testnum,'^',q,'=',b,'mod',a)
                 break 
-print()
+
 for a in range(235):
     k=0
-    jq=powerofNum(a,powerofNum(2,k)*117)
+    jq=get_num_power(a,get_num_power(2,k)*117)
     if(jq%235 == 234):
         print('235 is composit')
 
 for a in range(237):
     for k in range(2):
-        jq=powerofNum(a,powerofNum(2,k)*59)
+        jq=get_num_power(a,get_num_power(2,k)*59)
         if(jq%237 == 236):
             print('237 is composit')
             
 n = 56153
 e = 23
 M = 2
-c = powerofNum(2,23)%n
+c = get_num_power(2,23)%n
 print('\nprob2',c)
 
 p=233
 q=241
 ceta=(p-1)*(q-1)
-
 print('p=233 q=241',ceta)
 
 gcdlist=[]
@@ -111,7 +113,8 @@ for d in range(ceta):
     result=d*e%ceta
     if(result==1):
         privatekey.append(d)
+
 print('d=',privatekey)
 print()
-print('a1',powerofNum(21811,19367)%233)
-print('a2',powerofNum(21811,19367)%241)
+print('a1',get_num_power(21811,19367)%233)
+print('a2',get_num_power(21811,19367)%241)
